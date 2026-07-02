@@ -14,7 +14,7 @@ from groq import Groq
 load_dotenv()
 # --- 1. Initialize App --- 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'thisisasecretkey' 
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'thisisasecretkey') 
 
 # --- 2. Database Configuration ---
 db_user = 'root'
