@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Green Bloom</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        /* Brown & Cream Theme */
+        :root { --primary-green: #8B4513; --dark-grey: #5C4033; --light-grey: #FFFAF0; --white: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; color: var(--dark-grey); line-height: 1.6; background-color: var(--light-grey); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        h2 { font-size: 2.5rem; text-align: center; padding-bottom: 10px; font-weight: 600; margin-top: 20px; }
+        
+        /* Header (Same as other pages) */
+        .main-header { background: var(--white); padding: 15px 0; border-bottom: 1px solid #eaeaea; }
+        .main-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--primary-green); text-decoration: none; }
+        .nav-links { list-style: none; display: flex; }
+        .nav-links li { margin-left: 25px; }
+        .nav-links a { text-decoration: none; color: var(--dark-grey); font-weight: 600; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--primary-green); }
+
+        /* Checkout Layout */
+        .checkout-container { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; margin-top: 40px; }
+        
+        .section-box {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .section-box h3 { font-size: 1.5rem; border-bottom: 2px solid var(--light-grey); padding-bottom: 10px; margin-bottom: 20px; }
+
+        /* Form Styles */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
+        .form-group input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: 'Poppins', sans-serif; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        /* Order Summary Items */
+        .summary-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .summary-item:last-child { border-bottom: none; }
+        .summary-item-details { display: flex; align-items: center; }
+        .summary-item-details img { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 15px; }
+        .summary-item-name { font-weight: 600; font-size: 1rem; }
+        .summary-item-qty { font-size: 0.85rem; color: #777; }
+        .summary-item-price { font-weight: 600; }
+
+        /* Totals */
+        .total-row { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 600; margin-top: 10px; padding-top: 20px; border-top: 2px solid var(--light-grey); }
+        .total-price { color: var(--primary-green); font-size: 1.5rem; }
+        
+        /* Pay Button */
+        .pay-btn { background: var(--primary-green); color: var(--white); border: none; padding: 15px 20px; border-radius: 5px; cursor: pointer; width: 100%; font-size: 1.2rem; font-weight: 600; margin-top: 20px; transition: background 0.3s ease; }
+        .pay-btn:hover { background: #6a340f; }
+
+        /* Footer */
+        .main-footer { background: var(--dark-grey); color: #cccccc; padding: 50px 0 20px 0; margin-top: 60px; }
+        .footer-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; padding-bottom: 30px; }
+        .footer-bottom { text-align: center; border-top: 1px solid #555; padding-top: 20px; margin-top: 30px; font-size: 0.9rem; }
+    
+/* --- User Dropdown Styles --- */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 25px;
+}
+.user-dropdown .icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--dark-grey, #5C4033);
+    transition: color 0.3s ease;
+}
+.user-dropdown .icon-btn:hover {
+    color: var(--primary-green, #8B4513);
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1000;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.dropdown-content a, .dropdown-header {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.dropdown-header {
+    background-color: #fafafa;
+    border-bottom: 1px solid #eee;
+    color: #8B4513;
+    cursor: default;
+}
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+/* .user-dropdown:hover .dropdown-content removed for click usage */
+
+    
+.dropdown-content.show {
+    display: block !important;
+}
+
+    
+        /* --- Mobile Responsive Styles --- */
+        @media (max-width: 768px) {
+            .main-nav { flex-direction: column; gap: 15px; }
+            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; padding: 0; margin: 10px 0; }
+            .nav-links li { margin: 5px 10px; }
+            .nav-icons { margin-top: 10px; justify-content: center; width: 100%; flex-wrap: wrap; gap: 10px; }
+            .user-dropdown { margin-left: 10px; }
+            .nav-icons a { margin-left: 10px; }
+            .nav-search-form .search-input { width: 140px; }
+            .nav-search-form .search-input:focus { width: 180px; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .category-container, .footer-container { grid-template-columns: 1fr; }
+            .footer-column { text-align: center; margin-bottom: 10px; }
+            .cart-item { flex-direction: column; align-items: flex-start; }
+            .cart-item-img { width: 100%; height: auto; max-height: 200px; }
+            .remove-btn { margin-left: 0; margin-top: 15px; }
+            .cart-item-quantity { margin-top: 10px; }
+            .chatbot-container { width: 90vw; right: 5vw; bottom: 90px; }
+            .auth-container { width: 95%; margin: 40px auto; padding: 20px; }
+        }
+    </style>
+
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="container main-nav">
+            <a href="{{ url_for('home') }}" class="logo">Green Bloom</a>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('indoor_plants') }}">Indoor Plants</a></li>
+                <li><a href="{{ url_for('outdoor_plants') }}">Outdoor Plants</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>Checkout</h2>
+            
+            <form action="{{ url_for('process_payment') }}" method="POST">
+                
+                <div class="checkout-container">
+                    
+                    <div class="shipping-info">
+                        <div class="section-box">
+                            <h3>Shipping Address</h3>
+                            
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" name="full_name" required placeholder="John Doe">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="text" name="phone" required placeholder="+91 98765 43210">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Address (House No, Street)</label>
+                                <input type="text" name="address" required placeholder="123 Green Street">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" name="city" required placeholder="Mumbai">
+                                </div>
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <input type="text" name="state" required placeholder="Maharashtra">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Zip Code</label>
+                                <input type="text" name="zip_code" required placeholder="400001">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order-summary">
+                        <div class="section-box">
+                            <h3>Your Order</h3>
+                            
+                            {% for item in cart_items %}
+                            <div class="summary-item">
+                                <div class="summary-item-details">
+                                    <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}">
+                                    <div>
+                                        <div class="summary-item-name">{{ item.product.name }}</div>
+                                        <div class="summary-item-qty">Qty: {{ item.quantity }}</div>
+                                    </div>
+                                </div>
+                                <div class="summary-item-price">₹{{ "%.2f"|format(item.product.price * item.quantity) }}</div>
+                            </div>
+                            {% endfor %}
+
+                            <div class="total-row">
+                                <span>Total Amount</span>
+                                <span class="total-price">₹{{ "%.2f"|format(total_price) }}</span>
+                            </div>
+
+                            <div style="margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px;">
+                                <h4 style="margin-bottom: 15px;">Select Payment Method</h4>
+                                
+                                <div class="form-group">
+                                    <label style="cursor:pointer; display:flex; align-items:center; margin-bottom:10px;">
+                                        <input type="radio" name="payment_method" value="UPI" style="width:auto; margin-right:10px;"> 
+                                        <i class="fa-solid fa-mobile-screen" style="margin-right:8px; color:#8B4513;"></i> UPI / GPay / PhonePe
+                                    </label>
+                                    
+                                    <label style="cursor:pointer; display:flex; align-items:center; margin-bottom:10px;">
+                                        <input type="radio" name="payment_method" value="Card" style="width:auto; margin-right:10px;"> 
+                                        <i class="fa-regular fa-credit-card" style="margin-right:8px; color:#8B4513;"></i> Credit / Debit Card
+                                    </label>
+                                    
+                                    <label style="cursor:pointer; display:flex; align-items:center;">
+                                        <input type="radio" name="payment_method" value="COD" checked style="width:auto; margin-right:10px;"> 
+                                        <i class="fa-solid fa-money-bill-wave" style="margin-right:8px; color:#8B4513;"></i> Cash on Delivery
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="pay-btn">Place Order</button>
+                            <p style="text-align:center; font-size:0.85rem; color:#777; margin-top:10px;">
+                                <i class="fa-solid fa-lock"></i> Secure Payment
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-bottom"><p>© 2025 Green Bloom. All Rights Reserved.</p></div>
+        </div>
+    </footer>
+<!-- Chatbot UI -->
+    <button class="chatbot-toggler" id="chatbot-toggler" aria-label="Open Chat">
+        <i class="fa-solid fa-message"></i>
+    </button>
+    
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-header">
+            <h3><i class="fa-solid fa-leaf" style="margin-right: 8px;"></i> Green Bloom Bot</h3>
+            <button class="chatbot-close" id="chatbot-close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="chat-msg bot">Hello! How can I help you today?</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+            <button id="chat-send"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        const toggler = document.getElementById('chatbot-toggler');
+        const container = document.getElementById('chatbot-container');
+        const closeBtn = document.getElementById('chatbot-close');
+        const sendBtn = document.getElementById('chat-send');
+        const chatInput = document.getElementById('chat-input');
+        const messagesDiv = document.getElementById('chatbot-messages');
+
+        toggler.addEventListener('click', () => {
+            container.classList.add('active');
+            chatInput.focus();
+        });
+
+        closeBtn.addEventListener('click', () => {
+            container.classList.remove('active');
+        });
+
+        function addMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('chat-msg', sender);
+            msgDiv.innerText = text;
+            messagesDiv.appendChild(msgDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        async function chatAddToCart(productId, btn) {
+            btn.disabled = true;
+            btn.textContent = 'Adding...';
+            try {
+                const response = await fetch('/add_to_cart/' + productId, {
+                    method: 'POST',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
+                if (response.redirected) {
+                    addMessage('Please log in first to add items to your cart!', 'bot');
+                    btn.textContent = 'Add to Cart';
+                    btn.disabled = false;
+                    return;
+                }
+                const result = await response.json();
+                btn.classList.add('added');
+                btn.textContent = '\u2713 Added!';
+                const badge = document.querySelector('.cart-count');
+                if (badge) {
+                    badge.textContent = result.cart_count;
+                } else {
+                    const cartLink = document.querySelector('.cart-link');
+                    if (cartLink) {
+                        const b = document.createElement('span');
+                        b.classList.add('cart-count');
+                        b.textContent = result.cart_count;
+                        cartLink.appendChild(b);
+                    }
+                }
+                setTimeout(function() { btn.classList.remove('added'); btn.textContent = 'Add to Cart'; btn.disabled = false; }, 2000);
+            } catch (err) {
+                btn.textContent = 'Add to Cart';
+                btn.disabled = false;
+            }
+        }
+
+        function addProductCards(products) {
+            if (!products || products.length === 0) return;
+            const list = document.createElement('div');
+            list.classList.add('chat-product-list');
+            products.forEach(function(p) {
+                const item = document.createElement('div');
+                item.classList.add('chat-product-item');
+                const imgSrc = p.image_url || '';
+                const imgTag = imgSrc ? '<img src="' + imgSrc + '" alt="' + p.name + '">' : '';
+                item.innerHTML = imgTag +
+                    '<div class="cp-details">' +
+                    '<div class="cp-name"><a href="/product/' + p.id + '">' + p.name + '</a></div>' +
+                    '<div class="cp-price">\u20b9' + p.price.toLocaleString('en-IN') + '</div>' +
+                    '</div>' +
+                    '<button class="cp-cart-btn" onclick="chatAddToCart(' + p.id + ', this)">Add to Cart</button>';
+                list.appendChild(item);
+            });
+            messagesDiv.appendChild(list);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const typing = document.createElement('div');
+            typing.classList.add('chat-typing');
+            typing.id = 'typing-indicator';
+            typing.innerHTML = '<span></span><span></span><span></span>';
+            messagesDiv.appendChild(typing);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const typing = document.getElementById('typing-indicator');
+            if (typing) typing.remove();
+        }
+
+        async function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            addMessage(text, 'user');
+            chatInput.value = '';
+            sendBtn.disabled = true;
+
+            showTypingIndicator();
+
+            try {
+                const response = await fetch('/chatbot', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+                const data = await response.json();
+                removeTypingIndicator();
+                addMessage(data.reply, 'bot');
+                addProductCards(data.products);
+            } catch (error) {
+                console.error('Error:', error);
+                removeTypingIndicator();
+                addMessage("Sorry, I'm having trouble connecting to the server.", 'bot');
+            } finally {
+                sendBtn.disabled = false;
+            }
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // --- Search Autocomplete Script ---
+        const searchInputElem = document.getElementById('search-input');
+        const suggestionsBox = document.getElementById('search-suggestions');
+        let searchTimeout = null;
+
+        searchInputElem.addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            const query = searchInputElem.value.trim();
+            
+            if (!query) {
+                suggestionsBox.classList.remove('active');
+                return;
+            }
+
+            // Wait 300ms after user stops typing before calling the DB
+            searchTimeout = setTimeout(async () => {
+                try {
+                    const response = await fetch(`/autocomplete?q=${encodeURIComponent(query)}`);
+                    const data = await response.json();
+                    
+                    if (data.suggestions && data.suggestions.length > 0) {
+                        suggestionsBox.innerHTML = data.suggestions.map(
+                            s => `<a href="/product/${s.id}" class="suggestion-element"><i class="fa-solid fa-seedling" style="margin-right:8px;color: #8B4513;"></i> ${s.name}</a>`
+                        ).join('');
+                        suggestionsBox.classList.add('active');
+                    } else {
+                        suggestionsBox.classList.remove('active');
+                    }
+                } catch (error) {
+                    console.error('Search API Error:', error);
+                }
+            }, 300);
+        });
+
+        // Hide suggestions when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!document.getElementById('search-form').contains(e.target)) {
+                suggestionsBox.classList.remove('active');
+            }
+        });
+    </script>
+
+
+<script>
+    function toggleUserDropdown() {
+        var dropdown = document.querySelector(".dropdown-content");
+        if(dropdown) {
+            dropdown.classList.toggle("show");
+        }
+    }
+    
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.closest('.user-dropdown')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Green Bloom</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Re-using your global styles */
+        :root {
+            --primary-green: #8B4513;
+            /* Rich saddle brown */
+            --dark-grey: #5C4033;
+            /* Dark brown for text */
+            --light-grey: #FFFAF0;
+            /* Floral White cream */
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-grey);
+            line-height: 1.6;
+            background-color: var(--light-grey);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Re-using Header styles */
+        .main-header {
+            background: var(--white);
+            padding: 15px 0;
+            border-bottom: 1px solid #eaeaea;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-grey);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        /* Re-using the login form styles */
+        .auth-container {
+            max-width: 450px;
+            margin: 80px auto;
+            padding: 40px;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .auth-container h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .auth-form .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .auth-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .auth-form input[type="text"],
+        .auth-form input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+
+        .auth-form .submit-btn {
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .auth-form .submit-btn:hover {
+            background: #704906e5;
+        }
+
+        .auth-switch-link {
+            margin-top: 25px;
+            font-size: 0.9rem;
+        }
+
+        .auth-switch-link a {
+            color: var(--primary-green);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* --- STYLES for Flash Messages --- */
+        .flash-messages {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .flash-danger {
+            padding: 15px;
+            margin-bottom: 20px;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+        }
+
+        /* --- User Dropdown Styles --- */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 25px;
+        }
+
+        .user-dropdown .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--dark-grey, #5C4033);
+            transition: color 0.3s ease;
+        }
+
+        .user-dropdown .icon-btn:hover {
+            color: var(--primary-green, #8B4513);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 30px;
+            background-color: #fff;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a,
+        .dropdown-header {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .dropdown-header {
+            background-color: #fafafa;
+            border-bottom: 1px solid #eee;
+            color: #8B4513;
+            cursor: default;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* .user-dropdown:hover .dropdown-content removed for click usage */
+
+
+        .dropdown-content.show {
+            display: block !important;
+        }
+    
+        /* --- Mobile Responsive Styles --- */
+        @media (max-width: 768px) {
+            .main-nav { flex-direction: column; gap: 15px; }
+            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; padding: 0; margin: 10px 0; }
+            .nav-links li { margin: 5px 10px; }
+            .nav-icons { margin-top: 10px; justify-content: center; width: 100%; flex-wrap: wrap; gap: 10px; }
+            .user-dropdown { margin-left: 10px; }
+            .nav-icons a { margin-left: 10px; }
+            .nav-search-form .search-input { width: 140px; }
+            .nav-search-form .search-input:focus { width: 180px; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .category-container, .footer-container { grid-template-columns: 1fr; }
+            .footer-column { text-align: center; margin-bottom: 10px; }
+            .cart-item { flex-direction: column; align-items: flex-start; }
+            .cart-item-img { width: 100%; height: auto; max-height: 200px; }
+            .remove-btn { margin-left: 0; margin-top: 15px; }
+            .cart-item-quantity { margin-top: 10px; }
+            .chatbot-container { width: 90vw; right: 5vw; bottom: 90px; }
+            .auth-container { width: 95%; margin: 40px auto; padding: 20px; }
+        }
+    </style>
+
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="container main-nav">
+            <a href="{{ url_for('home') }}" class="logo">Green Bloom</a>
+
+            <ul class="nav-links">
+                <li><a href="{{ url_for('indoor_plants') }}">Indoor Plants</a></li>
+                <li><a href="{{ url_for('outdoor_plants') }}">Outdoor Plants</a></li>
+
+
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <h1>Login to Your Account</h1>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul class="flash-messages">
+                {% for category, message in messages %}
+                <li class="flash-{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+
+            <form method="POST" action="{{ url_for('login') }}" class="auth-form" novalidate>
+                {{ form.hidden_tag() }}
+
+                <div class="form-group">
+                    {{ form.username.label }}
+                    {{ form.username }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.password.label }}
+                    {{ form.password }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.submit(class="submit-btn") }}
+                </div>
+            </form>
+
+            <div class="auth-switch-link">
+                Don't have an account? <a href="{{ url_for('register') }}">Register here</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleUserDropdown() {
+            var dropdown = document.querySelector(".dropdown-content");
+            if (dropdown) {
+                dropdown.classList.toggle("show");
+            }
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.closest('.user-dropdown')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

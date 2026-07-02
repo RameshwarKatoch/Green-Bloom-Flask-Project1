@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Green Bloom</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Global Styles */
+        :root { 
+            --primary-green: #8B4513; /* Rich saddle brown */
+            --dark-grey: #5C4033; /* Dark brown for text */
+            --light-grey: #FFFAF0; /* Floral White cream */
+            --white: #ffffff; 
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; color: var(--dark-grey); line-height: 1.6; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        h1, h2, h3 { line-height: 1.2; margin-bottom: 20px; }
+        h2 { font-size: 2.5rem; text-align: center; padding-bottom: 10px; font-weight: 600; }
+        section { padding: 60px 0; }
+
+        /* Header Styles */
+        .main-header { background: var(--white); padding: 15px 0; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 100; }
+        .main-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--primary-green); text-decoration: none; }
+        .nav-links { list-style: none; display: flex; }
+        .nav-links li { margin-left: 25px; }
+        .nav-links a { text-decoration: none; color: var(--dark-grey); font-weight: 600; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--primary-green); }
+
+        /* Page Hero */
+        .page-hero { 
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1974&auto=format&fit=crop'); 
+            background-size: cover; 
+            background-position: center; 
+            height: 50vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            color: var(--white); 
+        }
+        .page-hero h1 { font-size: 3rem; font-weight: 700; }
+
+        /* About Content Styles */
+        .about-content {
+            background: var(--white);
+        }
+        .about-content .container {
+            max-width: 800px; /* Narrower for reading text */
+        }
+        .about-content h2 {
+            text-align: left;
+            font-size: 2.2rem;
+        }
+        .about-content p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        .about-content ul {
+            list-style-position: inside;
+            font-size: 1.1rem;
+            margin-left: 10px;
+        }
+        .about-content li {
+            margin-bottom: 10px;
+        }
+        .about-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-top: 30px;
+        }
+
+        /* Footer Styles */
+        .main-footer { background: var(--dark-grey); color: var(--white); padding: 50px 0 20px 0; }
+        .footer-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; padding-bottom: 30px; }
+        .footer-column h3 { color: var(--white); margin-bottom: 20px; }
+        .footer-column ul { list-style: none; padding: 0; }
+        .footer-column li { margin-bottom: 10px; }
+        .footer-column a { color: #cccccc; text-decoration: none; transition: color 0.3s ease; }
+        .footer-column a:hover { color: var(--primary-green); }
+        .footer-bottom { text-align: center; border-top: 1px solid #555; padding-top: 20px; margin-top: 30px; font-size: 0.9rem; color: #cccccc; }
+    
+/* --- User Dropdown Styles --- */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 25px;
+}
+.user-dropdown .icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--dark-grey, #5C4033);
+    transition: color 0.3s ease;
+}
+.user-dropdown .icon-btn:hover {
+    color: var(--primary-green, #8B4513);
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1000;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.dropdown-content a, .dropdown-header {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.dropdown-header {
+    background-color: #fafafa;
+    border-bottom: 1px solid #eee;
+    color: #8B4513;
+    cursor: default;
+}
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+/* .user-dropdown:hover .dropdown-content removed for click usage */
+
+    
+.dropdown-content.show {
+    display: block !important;
+}
+
+    
+        /* --- Mobile Responsive Styles --- */
+        @media (max-width: 768px) {
+            .main-nav { flex-direction: column; gap: 15px; }
+            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; padding: 0; margin: 10px 0; }
+            .nav-links li { margin: 5px 10px; }
+            .nav-icons { margin-top: 10px; justify-content: center; width: 100%; flex-wrap: wrap; gap: 10px; }
+            .user-dropdown { margin-left: 10px; }
+            .nav-icons a { margin-left: 10px; }
+            .nav-search-form .search-input { width: 140px; }
+            .nav-search-form .search-input:focus { width: 180px; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .category-container, .footer-container { grid-template-columns: 1fr; }
+            .footer-column { text-align: center; margin-bottom: 10px; }
+            .cart-item { flex-direction: column; align-items: flex-start; }
+            .cart-item-img { width: 100%; height: auto; max-height: 200px; }
+            .remove-btn { margin-left: 0; margin-top: 15px; }
+            .cart-item-quantity { margin-top: 10px; }
+            .chatbot-container { width: 90vw; right: 5vw; bottom: 90px; }
+            .auth-container { width: 95%; margin: 40px auto; padding: 20px; }
+        }
+    </style>
+
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="container main-nav">
+            <a href="{{ url_for('home') }}" class="logo">Green Bloom</a>
+            
+            <ul class="nav-links">
+                <li><a href="{{ url_for('indoor_plants') }}">Indoor Plants</a></li>
+                <li><a href="{{ url_for('outdoor_plants') }}">Outdoor Plants</a></li>
+                
+                
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <h1>Our Story</h1>
+        </section>
+
+        <section class="about-content">
+            <div class="container">
+                <h2>Welcome to Green Bloom</h2>
+                <p>
+                    We believe that green spaces are happy spaces. Founded in 2025, Green Bloom started with a simple idea: to make the joy of gardening accessible to everyone, no matter how small their space. We saw concrete jungles and yearned to bring a touch of nature, life, and color to urban homes.
+                </p>
+                <p>
+                    Our passion is for more than just plants; it's about the positive impact they have on our lives. A plant can purify your air, brighten your mood, and turn a simple room into a living, breathing sanctuary.
+                </p>
+                
+                <h3>Our Promise</h3>
+                <p>We are committed to providing you with the best. This means:</p>
+                <ul>
+                    <li><strong>Peak Quality:</strong> We partner with the best local nurseries to hand-pick every plant, ensuring it's healthy, vibrant, and ready to thrive in its new home.</li>
+                    <li><strong>Sustainability:</strong> We use eco-friendly packaging and sustainable sourcing methods, because we love the planet as much as we love plants.</li>
+                    <li><strong>Expert Support:</strong> Whether you're a seasoned plant parent or a nervous beginner, we're here to help with care guides and support to ensure your plant journey is a successful one.</li>
+                </ul>
+
+                <p style="margin-top: 20px;">
+                    Thank you for joining our community. Let's make the world a little greener, one plant at a time.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-container">
+                 <div class="footer-column">
+                    <a href="{{ url_for('home') }}" class="logo">Green Bloom</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="{{ url_for('indoor_plants') }}">Indoor Plants</a></li>
+                        <li><a href="{{ url_for('outdoor_plants') }}">Outdoor Plants</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="{{ url_for('about') }}">Our Story</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Green Bloom. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+<!-- Chatbot UI -->
+    <button class="chatbot-toggler" id="chatbot-toggler" aria-label="Open Chat">
+        <i class="fa-solid fa-message"></i>
+    </button>
+    
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-header">
+            <h3><i class="fa-solid fa-leaf" style="margin-right: 8px;"></i> Green Bloom Bot</h3>
+            <button class="chatbot-close" id="chatbot-close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="chat-msg bot">Hello! How can I help you today?</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+            <button id="chat-send"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        const toggler = document.getElementById('chatbot-toggler');
+        const container = document.getElementById('chatbot-container');
+        const closeBtn = document.getElementById('chatbot-close');
+        const sendBtn = document.getElementById('chat-send');
+        const chatInput = document.getElementById('chat-input');
+        const messagesDiv = document.getElementById('chatbot-messages');
+
+        toggler.addEventListener('click', () => {
+            container.classList.add('active');
+            chatInput.focus();
+        });
+
+        closeBtn.addEventListener('click', () => {
+            container.classList.remove('active');
+        });
+
+        function addMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('chat-msg', sender);
+            msgDiv.innerText = text;
+            messagesDiv.appendChild(msgDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        async function chatAddToCart(productId, btn) {
+            btn.disabled = true;
+            btn.textContent = 'Adding...';
+            try {
+                const response = await fetch('/add_to_cart/' + productId, {
+                    method: 'POST',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
+                if (response.redirected) {
+                    addMessage('Please log in first to add items to your cart!', 'bot');
+                    btn.textContent = 'Add to Cart';
+                    btn.disabled = false;
+                    return;
+                }
+                const result = await response.json();
+                btn.classList.add('added');
+                btn.textContent = '\u2713 Added!';
+                const badge = document.querySelector('.cart-count');
+                if (badge) {
+                    badge.textContent = result.cart_count;
+                } else {
+                    const cartLink = document.querySelector('.cart-link');
+                    if (cartLink) {
+                        const b = document.createElement('span');
+                        b.classList.add('cart-count');
+                        b.textContent = result.cart_count;
+                        cartLink.appendChild(b);
+                    }
+                }
+                setTimeout(function() { btn.classList.remove('added'); btn.textContent = 'Add to Cart'; btn.disabled = false; }, 2000);
+            } catch (err) {
+                btn.textContent = 'Add to Cart';
+                btn.disabled = false;
+            }
+        }
+
+        function addProductCards(products) {
+            if (!products || products.length === 0) return;
+            const list = document.createElement('div');
+            list.classList.add('chat-product-list');
+            products.forEach(function(p) {
+                const item = document.createElement('div');
+                item.classList.add('chat-product-item');
+                const imgSrc = p.image_url || '';
+                const imgTag = imgSrc ? '<img src="' + imgSrc + '" alt="' + p.name + '">' : '';
+                item.innerHTML = imgTag +
+                    '<div class="cp-details">' +
+                    '<div class="cp-name"><a href="/product/' + p.id + '">' + p.name + '</a></div>' +
+                    '<div class="cp-price">\u20b9' + p.price.toLocaleString('en-IN') + '</div>' +
+                    '</div>' +
+                    '<button class="cp-cart-btn" onclick="chatAddToCart(' + p.id + ', this)">Add to Cart</button>';
+                list.appendChild(item);
+            });
+            messagesDiv.appendChild(list);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const typing = document.createElement('div');
+            typing.classList.add('chat-typing');
+            typing.id = 'typing-indicator';
+            typing.innerHTML = '<span></span><span></span><span></span>';
+            messagesDiv.appendChild(typing);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const typing = document.getElementById('typing-indicator');
+            if (typing) typing.remove();
+        }
+
+        async function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            addMessage(text, 'user');
+            chatInput.value = '';
+            sendBtn.disabled = true;
+
+            showTypingIndicator();
+
+            try {
+                const response = await fetch('/chatbot', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+                const data = await response.json();
+                removeTypingIndicator();
+                addMessage(data.reply, 'bot');
+                addProductCards(data.products);
+            } catch (error) {
+                console.error('Error:', error);
+                removeTypingIndicator();
+                addMessage("Sorry, I'm having trouble connecting to the server.", 'bot');
+            } finally {
+                sendBtn.disabled = false;
+            }
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // --- Search Autocomplete Script ---
+        const searchInputElem = document.getElementById('search-input');
+        const suggestionsBox = document.getElementById('search-suggestions');
+        let searchTimeout = null;
+
+        searchInputElem.addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            const query = searchInputElem.value.trim();
+            
+            if (!query) {
+                suggestionsBox.classList.remove('active');
+                return;
+            }
+
+            // Wait 300ms after user stops typing before calling the DB
+            searchTimeout = setTimeout(async () => {
+                try {
+                    const response = await fetch(`/autocomplete?q=${encodeURIComponent(query)}`);
+                    const data = await response.json();
+                    
+                    if (data.suggestions && data.suggestions.length > 0) {
+                        suggestionsBox.innerHTML = data.suggestions.map(
+                            s => `<a href="/product/${s.id}" class="suggestion-element"><i class="fa-solid fa-seedling" style="margin-right:8px;color: #8B4513;"></i> ${s.name}</a>`
+                        ).join('');
+                        suggestionsBox.classList.add('active');
+                    } else {
+                        suggestionsBox.classList.remove('active');
+                    }
+                } catch (error) {
+                    console.error('Search API Error:', error);
+                }
+            }, 300);
+        });
+
+        // Hide suggestions when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!document.getElementById('search-form').contains(e.target)) {
+                suggestionsBox.classList.remove('active');
+            }
+        });
+    </script>
+
+
+<script>
+    function toggleUserDropdown() {
+        var dropdown = document.querySelector(".dropdown-content");
+        if(dropdown) {
+            dropdown.classList.toggle("show");
+        }
+    }
+    
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.closest('.user-dropdown')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
