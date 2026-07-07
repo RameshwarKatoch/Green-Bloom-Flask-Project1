@@ -116,6 +116,7 @@
         .auth-form input[type="password"] {
             width: 100%;
             padding: 12px;
+            padding-right: 40px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-family: 'Poppins', sans-serif;
@@ -250,6 +251,7 @@
     </style>
 
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
 </head>
 
@@ -292,7 +294,12 @@
 
                 <div class="form-group">
                     {{ form.password.label }}
-                    {{ form.password }}
+                    <div class="password-container" style="position: relative; display: flex; align-items: center;">
+                        {{ form.password }}
+                        <button type="button" id="togglePassword" style="position: absolute; right: 12px; background: none; border: none; cursor: pointer; color: var(--dark-grey); display: flex; align-items: center; justify-content: center; padding: 0;" aria-label="Toggle Password Visibility">
+                            <i class="fa-solid fa-eye" id="eyeIcon"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -326,6 +333,20 @@
                 }
             }
         }
+
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordField = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        });
     </script>
 
 </body>
